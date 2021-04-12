@@ -1,0 +1,110 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.sql.*;
+import java.util.ArrayList;
+
+public class CustemerDAO {
+
+
+    private String m_conn; // connection string
+
+    public CustemerDAO(String m_conn) {
+        this.m_conn = m_conn;
+    }
+
+    public ArrayList<Custemer> getAllEmployees() {
+        // fire select query
+        // create Employee instance per record
+        // create array list of all employees
+        // try to connect to db
+
+        ArrayList<Custemer>custemers = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(m_conn)) {
+            // check if connection succeed
+            if (conn != null) {
+
+                // prepare query string
+                String sql = "SELECT * FROM Customer";
+
+                // prepare statement
+                Statement stmt = conn.createStatement();
+
+                // fire query
+                ResultSet rs = stmt.executeQuery(sql);
+
+                // read results
+                while (rs.next()) {
+                    Custemer e = new Custemer(
+                            rs.getInt("id"),
+                            rs.getString("firstname"),
+                            rs.getString("lastname"),
+                            rs.getInt("numoforder"),
+                            rs.getDouble("height"));
+                custemers.add(e);
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return   custemers;
+    }
+
+    public void select(String query) {
+
+        // try to connect to db
+        try (Connection conn = DriverManager.getConnection(m_conn)) {
+            // check if connection succeed
+            if (conn != null) {
+
+                // prepare query string
+                String sql = query;
+
+                // prepare statement
+                Statement stmt = conn.createStatement();
+
+                // fire query
+                ResultSet rs = stmt.executeQuery(sql);
+
+                // read results
+                while (rs.next()) {
+                    System.out.println ( rs.getInt("id")+"\t"+
+                            rs.getString("firstname")+"\t"+
+                            rs.getString("lastname")+"\t"+
+                            rs.getInt("numoforder")+"\t"+
+                            rs.getDouble("height"));
+
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void update(String query) {
+
+        // try to connect to db
+        try (Connection conn = DriverManager.getConnection(m_conn)) {
+            // check if connection succeed
+            if (conn != null) {
+
+                // prepare query
+                String sql = query;
+
+                // prepare statement
+                Statement stmt = conn.createStatement();
+
+                // fire query
+                int result = stmt.executeUpdate(sql); // not expect result
+                System.out.println(result + " record updated.");
+            }
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

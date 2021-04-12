@@ -1,0 +1,10 @@
+package com.company;
+
+import java.util.Comparator;
+
+public class CustomerCompareByNumOfOrder implements Comparator<Custemer> {
+    @Override
+    public int compare(Custemer o1, Custemer o2) {
+        return Integer.compare(o1.getNumberoforders(),o2.getNumberoforders());
+    }
+}

@@ -1,0 +1,31 @@
+package com.company;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+      CustemerDAO custemerDAO = new CustemerDAO( "jdbc:sqlite:C:/Users/user1/Desktop/data/Custemer.db");
+
+        //empDAO.select("Select * from EMPLOYEES");
+        //System.out.println("=====================");
+        //empDAO.select("SELECT * FROM EMPLOYEES WHERE AGE > 30");
+        //System.out.println("=====================");
+        //empDAO.update("UPDATE EMPLOYEES SET AGE = 12 WHERE NAME LIKE 'ALL%'");
+        //System.out.println("=====================");
+        //empDAO.select("Select * from EMPLOYEES");
+
+        ArrayList<Custemer> employees = custemerDAO.getAllEmployees();
+        Collections.sort(employees);
+        Collections.sort(employees, new CustomerCompareByNumOfOrder());
+        Iterator<Custemer> iter = employees.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+
+
+    }

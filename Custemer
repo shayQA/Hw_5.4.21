@@ -1,0 +1,56 @@
+package com.company;
+
+public class Custemer implements Comparable<Custemer> {
+    // POJO
+    public    Integer ID;
+    public String firstname;
+    public String Lastname;
+    public int Numberoforders ;
+    public  Double Height ;
+
+
+    public Custemer(Integer ID, String text, String lastname, int numberoforders, Double height) {
+
+        this.ID = ID;
+        this.firstname = text;
+        Lastname = lastname;
+        Numberoforders = numberoforders;
+        Height = height;
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return Lastname;
+    }
+
+    public int getNumberoforders() {
+        return Numberoforders;
+    }
+
+    public Double getHeight() {
+        return Height;
+    }
+
+    @Override
+    public String toString() {
+        return "Custemer{" +
+                "ID=" + ID +
+                ", text='" + firstname + '\'' +
+                ", Lastname='" + Lastname + '\'' +
+                ", Numberoforders=" + Numberoforders +
+                ", Height=" + Height +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Custemer o) {
+        return this.Lastname.compareTo(o.Lastname);
+    }
+}
